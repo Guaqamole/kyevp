@@ -60,7 +60,7 @@ const Navbar = () => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '64px'
+        height: '120px'
       }}>
         {/* 로고 */}
         <Link 
