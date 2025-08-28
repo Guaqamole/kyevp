@@ -1,156 +1,247 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import SupportImg from '../assets/pages/support.png';
+import Logo from '../assets/logo.png';
 
 const Support = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth < 768 || 
+                            window.innerHeight < 768;
+      setIsMobile(isMobileDevice);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    window.addEventListener('orientationchange', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', checkMobile);
+    };
+  }, []);
+
+  const handleImageClick = () => {
+    if (isMobile) {
+      setShowPopup(true);
+    }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          A/S 센터
-        </h1>
-        <p className="text-lg text-center text-gray-600 mb-12">
-          전문적인 기술 지원과 A/S 서비스를 제공합니다
-        </p>
-
-        {/* 서비스 특징 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            서비스 특징
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">전문 기술진</h3>
-              <p className="text-gray-600">리튬 배터리 전문 엔지니어</p>
+    <>
+      <div style={{
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        position: 'relative'
+      }}>
+        {isMobile ? (
+          <>
+            {/* 배경 이미지 */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 50,
+              backgroundImage: `url(${Logo})`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: 0.2,
+              zIndex: 1
+            }}></div>
+            
+            {/* 콘텐츠 */}
+            <div style={{
+              textAlign: 'center',
+              padding: '20px',
+              position: 'relative',
+              zIndex: 2
+            }}>
+              <h1 style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: '#1f2937',
+                marginBottom: '1rem'
+              }}>
+                A/S 센터
+              </h1>
+              <p style={{
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                color: '#6b7280',
+                marginBottom: '2rem',
+                lineHeight: '1.6'
+              }}>
+                모바일에서는 제품 상세 정보를 확인하세요.
+              </p>
+              <button
+                onClick={handleImageClick}
+                style={{
+                  backgroundColor: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  padding: '15px 30px',
+                  borderRadius: '8px',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 6px rgba(59, 130, 246, 0.2)',
+                  marginBottom: '2rem'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 6px 12px rgba(59, 130, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 6px rgba(59, 130, 246, 0.2)';
+                }}
+              >
+                제품상세보기
+              </button>
+              
+              {/* 문의하기 버튼 */}
+              <button style={{
+                backgroundColor: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                padding: '15px 30px',
+                borderRadius: '8px',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                width: isMobile ? '200px' : 'auto'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3b82f6';
+                e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#3b82f6';
+              }}
+              >
+                <a href="mailto:john.kim@kyevp.com" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  문의하기
+                </a>
+              </button>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">빠른 대응</h3>
-              <p className="text-gray-600">24시간 내 현장 방문</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">정기 점검</h3>
-              <p className="text-gray-600">무료 정기 점검 서비스</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">부품 교체</h3>
-              <p className="text-gray-600">정품 부품으로 교체</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">원격 지원</h3>
-              <p className="text-gray-600">원격 진단 및 기술 지원</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">보증 서비스</h3>
-              <p className="text-gray-600">제품 보증 기간 내 무료 수리</p>
-            </div>
+          </>
+        ) : (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '2rem'
+          }}>
+            <img 
+              src={SupportImg} 
+              alt="A/S Center" 
+              style={{
+                width: '100%',
+                maxWidth: '1400px',
+                height: 'auto',
+                objectFit: 'contain'
+              }}
+            />
+            
+            {/* 문의하기 버튼 */}
+            <button style={{
+              backgroundColor: 'transparent',
+              color: '#3b82f6',
+              border: '2px solid #3b82f6',
+              padding: '15px 30px',
+              borderRadius: '8px',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#3b82f6';
+              e.target.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.color = '#3b82f6';
+            }}
+            >
+              <a href="mailto:john.kim@kyevp.com" style={{ textDecoration: 'none', color: 'inherit' }}>
+                문의하기
+              </a>
+            </button>
           </div>
-        </section>
-
-        {/* A/S 서비스 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            A/S 서비스
-          </h2>
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">정기 점검</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• 배터리 상태 점검</li>
-                  <li>• 성능 테스트</li>
-                  <li>• 연결부 확인</li>
-                  <li>• 청소 및 정리</li>
-                  <li>• 점검 보고서 제공</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">수리 서비스</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• 고장 진단</li>
-                  <li>• 부품 교체</li>
-                  <li>• 성능 복원</li>
-                  <li>• 안전성 검증</li>
-                  <li>• 수리 완료 보고</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 연락처 정보 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            연락처 정보
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">본사 A/S 센터</h3>
-              <div className="space-y-2 text-gray-600">
-                <p><strong>주소:</strong> 서울시 강남구 테헤란로 123</p>
-                <p><strong>전화:</strong> 02-1234-5678</p>
-                <p><strong>팩스:</strong> 02-1234-5679</p>
-                <p><strong>이메일:</strong> as@batterycompany.com</p>
-                <p><strong>운영시간:</strong> 평일 09:00-18:00</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">긴급 A/S</h3>
-              <div className="space-y-2 text-gray-600">
-                <p><strong>긴급 전화:</strong> 02-1234-9999</p>
-                <p><strong>운영시간:</strong> 24시간</p>
-                <p><strong>응답시간:</strong> 2시간 내</p>
-                <p><strong>서비스:</strong> 현장 방문 수리</p>
-                <p><strong>지역:</strong> 수도권 전 지역</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            자주 묻는 질문
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Q: A/S 접수는 어떻게 하나요?</h3>
-              <p className="text-gray-600">A: 전화(02-1234-5678) 또는 이메일(as@batterycompany.com)로 접수 가능합니다.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Q: 보증 기간은 얼마나 되나요?</h3>
-              <p className="text-gray-600">A: 제품별로 다르며, 일반적으로 1-3년 보증을 제공합니다.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Q: 정기 점검은 언제 받을 수 있나요?</h3>
-              <p className="text-gray-600">A: 구매 후 6개월마다 무료 정기 점검을 제공합니다.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Q: 부품 교체 비용은 얼마인가요?</h3>
-              <p className="text-gray-600">A: 보증 기간 내에는 무료이며, 기간 외에는 부품 비용만 청구됩니다.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 문의 섹션 */}
-        <section className="text-center">
-          <h2 className="text-3xl font-semibold mb-8 text-blue-600">
-            A/S 문의
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            A/S 서비스에 대한 문의사항이 있으시면 언제든 연락주세요.
-          </p>
-          <div className="bg-blue-50 rounded-lg p-6 max-w-2xl mx-auto">
-            <p className="text-gray-700 mb-4">
-              <strong>일반 A/S:</strong> 02-1234-5678
-            </p>
-            <p className="text-gray-700 mb-4">
-              <strong>긴급 A/S:</strong> 02-1234-9999
-            </p>
-            <p className="text-gray-700">
-              <strong>이메일:</strong> as@batterycompany.com
-            </p>
-          </div>
-        </section>
+        )}
       </div>
-    </div>
+
+      {showPopup && isMobile && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '500px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden'
+          }}>
+            <button
+              onClick={closePopup}
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '20px',
+                cursor: 'pointer',
+                zIndex: 1001,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              ✕
+            </button>
+            <img 
+              src={SupportImg} 
+              alt="A/S Center Detail" 
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block'
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

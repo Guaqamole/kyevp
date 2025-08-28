@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import GolfCart from './pages/GolfCart';
 import Forklift from './pages/Forklift';
+import TwelveVStart from './pages/12VStart';
 import BESS from './pages/BESS';
 import HESS from './pages/HESS';
 import PowerBank from './pages/PowerBank';
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/golfcart" element={<GolfCart />} />
             <Route path="/forklift" element={<Forklift />} />
+            <Route path="/12vstart" element={<TwelveVStart />} />
             <Route path="/bess" element={<BESS />} />
             <Route path="/hess" element={<HESS />} />
             <Route path="/powerbank" element={<PowerBank />} />
