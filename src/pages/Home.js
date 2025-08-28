@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+      background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #0f172a 100%)',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -87,7 +87,7 @@ const Home = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(29, 78, 216, 0.7)',
+        backgroundColor: 'rgba(29, 78, 216, 0.6)',
         zIndex: 2
       }}></div>
 
@@ -108,8 +108,14 @@ const Home = () => {
             fontSize: isMobile ? '2rem' : '3rem',
             fontWeight: '300',
             marginBottom: '1rem',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-            lineHeight: isMobile ? '1.2' : '1'
+            textShadow: '0 4px 20px rgba(0,0,0,0.6), 0 0 40px rgba(59, 130, 246, 0.3)',
+            lineHeight: isMobile ? '1.2' : '1',
+            fontFamily: "'Noto Sans KR', sans-serif",
+            letterSpacing: '0.05em',
+            background: 'linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
           }}>
             우수한 품질로 미래를 준비합니다.
           </h1>
@@ -117,9 +123,12 @@ const Home = () => {
             fontSize: isMobile ? '1.1rem' : '1.5rem',
             marginTop: '2rem',
             marginBottom: '2rem',
-            opacity: 0.9,
-            textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
-            lineHeight: '1.4'
+            opacity: 0.95,
+            textShadow: '0 2px 10px rgba(0,0,0,0.4), 0 0 20px rgba(59, 130, 246, 0.2)',
+            lineHeight: '1.6',
+            fontFamily: "'Noto Sans KR', sans-serif",
+            fontWeight: '400',
+            letterSpacing: '0.02em'
           }}>
             KYEVP는 최고의 리튬인산철배터리 회사로서 <br />
             전기차용 셀을 활용한 골프카트, 지게차와 같은 <br />
@@ -133,18 +142,22 @@ const Home = () => {
             flexDirection: isMobile ? 'column' : 'row'
           }}>
             <button style={{
-              backgroundColor: 'white',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
               color: '#1d4ed8',
               border: 'none',
               padding: isMobile ? '12px 24px' : '15px 30px',
-              borderRadius: '8px',
+              borderRadius: '12px',
               fontSize: isMobile ? '1rem' : '1.1rem',
               fontWeight: '600',
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(59, 130, 246, 0.2)',
               width: isMobile ? 'auto' : 'auto',
-              minWidth: isMobile ? '200px' : 'auto'
+              minWidth: isMobile ? '200px' : 'auto',
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: '0.02em',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = 'translateY(-2px)';
@@ -172,17 +185,21 @@ const Home = () => {
               </button>
             </button>
             <button style={{
-              backgroundColor: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
               color: 'white',
-              border: '2px solid white',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
               padding: isMobile ? '12px 24px' : '15px 30px',
-              borderRadius: '8px',
+              borderRadius: '12px',
               fontSize: isMobile ? '1rem' : '1.1rem',
               fontWeight: '600',
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               width: isMobile ? 'auto' : 'auto',
-              minWidth: isMobile ? '200px' : 'auto'
+              minWidth: isMobile ? '200px' : 'auto',
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: '0.02em',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)'
             }}
             onMouseEnter={(e) => {
               e.target.style.backgroundColor = 'white';
@@ -224,17 +241,28 @@ const Home = () => {
           }}>
             <h1 style={{
               fontSize: isMobile ? '3rem' : '4.5rem',
-              fontWeight: 'bold',
+              fontWeight: '800',
               color: '#1f2937',
               marginBottom: '2rem',
-              lineHeight: '1'
+              lineHeight: '1',
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: '-0.02em',
+              background: 'linear-gradient(135deg, #1f2937 0%, #3b82f6 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: '0 4px 20px rgba(59, 130, 246, 0.1)'
             }}>
               PRODUCT
             </h1>
             <p style={{
               fontSize: isMobile ? '0.9rem' : '1.1rem',
               color: '#4b5563',
-              lineHeight: '1.8'
+              lineHeight: '1.8',
+              fontFamily: "'Noto Sans KR', sans-serif",
+              fontWeight: '400',
+              letterSpacing: '0.01em',
+              textShadow: '0 1px 3px rgba(0,0,0,0.05)'
             }}>
               우리가 살아가고 있는 현대사회는 앞으로<br />
               다가올 미래사회의 변화를 예측할 수 없을<br />
@@ -367,20 +395,24 @@ const Home = () => {
             <h2 style={{
               fontSize: isMobile ? '1rem' : '1.2rem',
               color: '#6b7280',
-              fontWeight: '500',
-              fontWeight: 'bold',
+              fontWeight: '700',
               marginBottom: '1rem',
               textTransform: 'uppercase',
-              letterSpacing: '2px'
+              letterSpacing: '3px',
+              fontFamily: "'Inter', sans-serif",
+              textShadow: '0 2px 8px rgba(0,0,0,0.1)'
             }}>
               Sunwooda
             </h2>
             <h1 style={{
               fontSize: isMobile ? '2.5rem' : '3.5rem',
-              fontWeight: 'bold',
+              fontWeight: '800',
               color: '#1f2937',
               marginBottom: '2rem',
-              lineHeight: '1.1'
+              lineHeight: '1.1',
+              fontFamily: "'Noto Sans KR', sans-serif",
+              letterSpacing: '-0.01em',
+              textShadow: '0 4px 20px rgba(0,0,0,0.1)'
             }}>
               혁신적인<br />
               배터리 기술
@@ -546,9 +578,16 @@ const Home = () => {
             </h2>
             <h1 style={{
               fontSize: isMobile ? '3rem' : '4.5rem',
-              fontWeight: 'bold',
+              fontWeight: '800',
               color: '#1f2937',
-              lineHeight: '1'
+              lineHeight: '1',
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: '-0.02em',
+              background: 'linear-gradient(135deg, #1f2937 0%, #3b82f6 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: '0 4px 20px rgba(59, 130, 246, 0.1)'
             }}>
               PARTNER
             </h1>
