@@ -1,27 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <footer style={{
       backgroundColor: '#1f2937',
       color: '#f9fafb',
-      padding: '48px 0 24px 0',
+      padding: isMobile ? '32px 0 24px 0' : '24px 0 24px 0',
       marginTop: 'auto'
     }}>
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        padding: '0 16px'
+        padding: isMobile ? '0 20px' : '0 16px'
       }}>
         {/* 하단 Footer */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '16px',
+          gap: isMobile ? '24px' : '16px',
           textAlign: 'center'
         }}>
           {/* 로고 및 저작권 */}
@@ -29,128 +41,92 @@ const Footer = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '8px'
+            gap: isMobile ? '12px' : '8px'
           }}>
-            <div style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: '#ffffff'
-            }}>
-              리튬배터리
-            </div>
             <p style={{
+              fontSize: isMobile ? '1rem' : '0.9rem',
+              fontWeight: 'bold',
               color: '#9ca3af',
-              fontSize: '14px'
             }}>
-              © {currentYear} 리튬배터리 전문기업. All rights reserved.
+              주식회사 케이와이이브피 (KYEVP)
             </p>
-          </div>
-
-          {/* 추가 정보 */}
-          <div style={{
-            display: 'flex',
-            gap: '24px',
-            flexWrap: 'wrap',
-            justifyContent: 'center'
-          }}>
-            <Link
-              to="/"
-              style={{
-                color: '#9ca3af',
-                textDecoration: 'none',
-                fontSize: '12px',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = '#ffffff';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = '#9ca3af';
-              }}
-            >
-              개인정보처리방침
-            </Link>
-            <Link
-              to="/"
-              style={{
-                color: '#9ca3af',
-                textDecoration: 'none',
-                fontSize: '12px',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = '#ffffff';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = '#9ca3af';
-              }}
-            >
-              이용약관
-            </Link>
-            <Link
-              to="/"
-              style={{
-                color: '#9ca3af',
-                textDecoration: 'none',
-                fontSize: '12px',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = '#ffffff';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = '#9ca3af';
-              }}
-            >
-              사이트맵
-            </Link>
+            <p style={{
+              fontSize: isMobile ? '0.9rem' : '0.9rem',
+              color: '#9ca3af',
+            }}>
+              대표자명: 양지영
+            </p>
+            <p style={{
+              fontSize: isMobile ? '0.9rem' : '0.9rem',
+              color: '#9ca3af',
+            }}>
+              본사: 충청남도 당진시 솔산면 솔산로 513
+            </p>
+            <p style={{
+              fontSize: isMobile ? '0.9rem' : '0.9rem',
+              color: '#9ca3af',
+            }}>
+              사업품목: 전기차부품, 무역업
+            </p>
+            <p style={{
+              fontSize: isMobile ? '0.9rem' : '0.9rem',
+              color: '#9ca3af',
+            }}>
+              사업자등록번호: 875-86-01504
+            </p>
           </div>
 
           {/* 인증 정보 */}
           <div style={{
-            display: 'flex',
-            gap: '16px',
-            flexWrap: 'wrap',
+            display: 'grid',
+            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, auto)',
+            gap: isMobile ? '12px' : '16px',
             justifyContent: 'center',
-            marginTop: '8px'
+            marginTop: isMobile ? '16px' : '8px',
+            width: isMobile ? '100%' : 'auto',
+            maxWidth: isMobile ? '300px' : 'none'
           }}>
             <span style={{
               backgroundColor: '#374151',
-              padding: '6px 12px',
+              padding: isMobile ? '8px 12px' : '6px 12px',
               borderRadius: '4px',
-              fontSize: '12px',
+              fontSize: isMobile ? '13px' : '12px',
               color: '#d1d5db',
-              fontWeight: '500'
+              fontWeight: '500',
+              textAlign: 'center'
             }}>
               KC 인증
             </span>
             <span style={{
               backgroundColor: '#374151',
-              padding: '6px 12px',
+              padding: isMobile ? '8px 12px' : '6px 12px',
               borderRadius: '4px',
-              fontSize: '12px',
+              fontSize: isMobile ? '13px' : '12px',
               color: '#d1d5db',
-              fontWeight: '500'
+              fontWeight: '500',
+              textAlign: 'center'
             }}>
               CE 인증
             </span>
             <span style={{
               backgroundColor: '#374151',
-              padding: '6px 12px',
+              padding: isMobile ? '8px 12px' : '6px 12px',
               borderRadius: '4px',
-              fontSize: '12px',
+              fontSize: isMobile ? '13px' : '12px',
               color: '#d1d5db',
-              fontWeight: '500'
+              fontWeight: '500',
+              textAlign: 'center'
             }}>
               UL 인증
             </span>
             <span style={{
               backgroundColor: '#374151',
-              padding: '6px 12px',
+              padding: isMobile ? '8px 12px' : '6px 12px',
               borderRadius: '4px',
-              fontSize: '12px',
+              fontSize: isMobile ? '13px' : '12px',
               color: '#d1d5db',
-              fontWeight: '500'
+              fontWeight: '500',
+              textAlign: 'center'
             }}>
               ISO 9001
             </span>

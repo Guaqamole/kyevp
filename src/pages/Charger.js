@@ -1,124 +1,186 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ChargerImg from '../assets/pages/charger.png';
+import Logo from '../assets/logo.png';
 
 const Charger = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth < 768 || 
+                            window.innerHeight < 768;
+      setIsMobile(isMobileDevice);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    window.addEventListener('orientationchange', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', checkMobile);
+    };
+  }, []);
+
+  const handleImageClick = () => {
+    if (isMobile) {
+      setShowPopup(true);
+    }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          리튬 배터리 충전기
-        </h1>
-        <p className="text-lg text-center text-gray-600 mb-12">
-          리튬 배터리에 최적화된 고성능 충전기
-        </p>
-
-        {/* 제품 특징 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            제품 특징
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">리튬 전용</h3>
-              <p className="text-gray-600">리튬 배터리 특성에 최적화</p>
+    <>
+      <div style={{
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        position: 'relative'
+      }}>
+        {isMobile ? (
+          <>
+            {/* 배경 이미지 */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 50,
+              backgroundImage: `url(${Logo})`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: 0.2,
+              zIndex: 1
+            }}></div>
+            
+            {/* 콘텐츠 */}
+            <div style={{
+              textAlign: 'center',
+              padding: '20px',
+              position: 'relative',
+              zIndex: 2
+            }}>
+              <h1 style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: '#1f2937',
+                marginBottom: '1rem'
+              }}>
+                리튬 배터리 충전기
+              </h1>
+              <p style={{
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                color: '#6b7280',
+                marginBottom: '2rem',
+                lineHeight: '1.6'
+              }}>
+                모바일에서는 제품 상세 정보를 확인하세요.
+              </p>
+              <button
+                onClick={handleImageClick}
+                style={{
+                  backgroundColor: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  padding: '15px 30px',
+                  borderRadius: '8px',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 6px rgba(59, 130, 246, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 6px 12px rgba(59, 130, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 6px rgba(59, 130, 246, 0.2)';
+                }}
+              >
+                제품상세보기
+              </button>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">스마트 충전</h3>
-              <p className="text-gray-600">CC-CV 충전 알고리즘</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">다양한 출력</h3>
-              <p className="text-gray-600">12V, 24V, 48V 등 다양한 전압</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">안전 보호</h3>
-              <p className="text-gray-600">과충전, 단락, 과열 보호</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">LCD 디스플레이</h3>
-              <p className="text-gray-600">충전 상태 실시간 확인</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">자동 정지</h3>
-              <p className="text-gray-600">충전 완료 시 자동 정지</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 제품 사양 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            제품 사양
-          </h2>
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">기본 사양</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• 출력 전압: 12V, 24V, 48V</li>
-                  <li>• 충전 전류: 5A ~ 50A</li>
-                  <li>• 입력 전압: AC 220V</li>
-                  <li>• 효율: 90% 이상</li>
-                  <li>• 보호 기능: 과충전, 단락, 과열</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">물리적 특성</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• 크기: 200 x 150 x 80mm</li>
-                  <li>• 무게: 1kg ~ 3kg</li>
-                  <li>• 작동 온도: -10°C ~ 50°C</li>
-                  <li>• 보호 등급: IP54</li>
-                  <li>• 인증: KC, CE, UL</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 충전기 타입 */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-blue-600">
-            충전기 타입
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
-              <h4 className="font-semibold text-gray-800">일반 충전기</h4>
-              <p className="text-sm text-gray-600">기본 충전 기능</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
-              <h4 className="font-semibold text-gray-800">스마트 충전기</h4>
-              <p className="text-sm text-gray-600">LCD 디스플레이</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
-              <h4 className="font-semibold text-gray-800">고출력 충전기</h4>
-              <p className="text-sm text-gray-600">빠른 충전</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
-              <h4 className="font-semibold text-gray-800">맞춤형</h4>
-              <p className="text-sm text-gray-600">특수 요구사항</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 문의 섹션 */}
-        <section className="text-center">
-          <h2 className="text-3xl font-semibold mb-8 text-blue-600">
-            문의 및 견적
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            리튬 배터리 충전기에 대한 자세한 정보나 견적을 원하시면 연락주세요.
-          </p>
-          <div className="bg-blue-50 rounded-lg p-6 max-w-2xl mx-auto">
-            <p className="text-gray-700 mb-4">
-              <strong>연락처:</strong> 02-1234-5678
-            </p>
-            <p className="text-gray-700">
-              <strong>이메일:</strong> info@batterycompany.com
-            </p>
-          </div>
-        </section>
+          </>
+        ) : (
+          <img 
+            src={ChargerImg} 
+            alt="Lithium Battery Charger" 
+            style={{
+              width: '100%',
+              maxWidth: '1400px',
+              height: 'auto',
+              objectFit: 'contain'
+            }}
+          />
+        )}
       </div>
-    </div>
+
+      {showPopup && isMobile && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '500px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden'
+          }}>
+            <button
+              onClick={closePopup}
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '20px',
+                cursor: 'pointer',
+                zIndex: 1001,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              ✕
+            </button>
+            <img 
+              src={ChargerImg} 
+              alt="Lithium Battery Charger Detail" 
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block'
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

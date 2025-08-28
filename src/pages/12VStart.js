@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import BESSImg from '../assets/pages/bess.png';
+import TwelveVStartImg from '../assets/pages/12vstart.png';
 import Logo from '../assets/logo.png';
 
-const BESS = () => {
+const TwelveVStart = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -72,7 +72,7 @@ const BESS = () => {
                 color: '#1f2937',
                 marginBottom: '1rem'
               }}>
-                산업용 BESS
+                12V 시동 배터리
               </h1>
               <p style={{
                 fontWeight: 'bold',
@@ -112,8 +112,8 @@ const BESS = () => {
           </>
         ) : (
           <img 
-            src={BESSImg} 
-            alt="Industrial BESS" 
+            src={TwelveVStartImg} 
+            alt="12V Start Battery" 
             style={{
               width: '100%',
               maxWidth: '1400px',
@@ -169,8 +169,8 @@ const BESS = () => {
               ✕
             </button>
             <img 
-              src={BESSImg} 
-              alt="Industrial BESS Detail" 
+              src={TwelveVStartImg} 
+              alt="12V Start Battery Detail" 
               style={{
                 width: '100%',
                 height: 'auto',
@@ -184,4 +184,4 @@ const BESS = () => {
   );
 };
 
-export default BESS; 
+export default TwelveVStart;
